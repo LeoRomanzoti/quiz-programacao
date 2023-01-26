@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useContext } from "react";
+import { QuizContext } from "./context/quiz";
+import Welcome from "./components/Welcome";
+import Question from "./components/Question";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [quizState, dispatch] = useContext(QuizContext);
+
+    return (
+        <div className="App">
+            <h1>Quiz de Programação</h1>
+            {quizState.gameStage === "Start" && <Welcome />}
+            {quizState.gameStage === "Playing" && <Question />}
+            <Welcome />
+        </div>
+    );
 }
 
 export default App;
